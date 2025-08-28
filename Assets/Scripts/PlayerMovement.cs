@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -10,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private bool grounded = false;
 
     private Rigidbody2D rb;
+
+    [HideInInspector] public float speedMultiplier = 1f;
 
     void Start()
     {
@@ -44,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     public void HandleMovement()
     {
         if (moving)
-            rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(moveSpeed * speedMultiplier, rb.linearVelocity.y);
         else
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
     }
