@@ -13,25 +13,49 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         rb = GetComponent<Rigidbody2D>();
-        CookieController.OnDip += HandleDip;
+    }
+
+    private void OnEnable()
+    {
+        EventSubscription();
+    }
+
+    private void OnDisable()
+    {
+        EventUnsubscription();
+    }
+
+    void EventSubscription()
+    {
+        DipArea_Move.OnAreaEnter += OnMove;
+        DipArea_Move.OnAreaExit += OnMove;
+
+        DipArea_Jump.OnAreaEnter += OnJump;
+    }
+
+    void EventUnsubscription()
+    {
+        DipArea_Move.OnAreaEnter -= OnMove;
+        DipArea_Move.OnAreaExit -= OnMove;
+
+        DipArea_Jump.OnAreaEnter -= OnJump;
     }
 
     void Update()
     {
-        if (!isAlive)
-        {
-            rb.linearVelocity = Vector2.zero;
-            return;
-        }
-
         HandleMovement();
     }
 
-    void HandleDip(bool dipping)
+    void OnMove(DipInput dinput)
     {
         if (isAlive)
-            moving = dipping;
+            moving = dinput.is_inputing;
     }
 
     public void StopPlayer()
@@ -56,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void Jump()
+    private void OnJump(DipInput dinput)
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // reset Y before jump
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -70,10 +94,4 @@ public class PlayerMovement : MonoBehaviour
             grounded = true;
         }
     }
-
-    private void OnDestroy()
-    {
-        CookieController.OnDip -= HandleDip;
-    }
-
 }
