@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 3f;
+    public AnimationCurve movementSpeedCurve;
     public float jumpForce = 5f;
+
     private bool moving = false;
+    float moveInputvalue;
+
     private bool isAlive = true;
     private bool grounded = false;
 
@@ -38,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     void EventSubscription()
     {
         DipArea_Move.OnAreaEnter += OnMove;
+        DipArea_Move.OnAreaStay += OnMove;
         DipArea_Move.OnAreaExit += OnMove;
 
         DipArea_Jump.OnAreaEnter += OnJump;
@@ -46,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     void EventUnsubscription()
     {
         DipArea_Move.OnAreaEnter -= OnMove;
+        DipArea_Move.OnAreaStay -= OnMove;
         DipArea_Move.OnAreaExit -= OnMove;
 
         DipArea_Jump.OnAreaEnter -= OnJump;
@@ -59,7 +64,10 @@ public class PlayerMovement : MonoBehaviour
     void OnMove(DipInput dinput)
     {
         if (isAlive)
+        {
             moving = dinput.is_inputing;
+            moveInputvalue = dinput.f_value;
+        }
     }
 
     public void StopPlayer()
@@ -71,10 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleMovement()
     {
-        if (moving)
-            rb.linearVelocity = new Vector2(moveSpeed * speedMultiplier, rb.linearVelocity.y);
-        else
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        if (moving && grounded)
+        {
+            var trueSpeed = movementSpeedCurve.Evaluate(moveInputvalue);
+            rb.linearVelocity = new Vector2(trueSpeed * speedMultiplier, rb.linearVelocity.y);
+        }
+        //else
+            //rb.linearVelocity = new Vector2(rb.linearVelocity., rb.linearVelocity.y);
     }
 
     public void Die()
