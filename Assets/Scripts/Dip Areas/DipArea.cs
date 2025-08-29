@@ -4,6 +4,7 @@ using UnityEngine;
 public class DipArea : MonoBehaviour
 {
     protected Cookie _cookie;
+    protected float _cookieDepthf;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -33,4 +34,9 @@ public class DipArea : MonoBehaviour
     }
 
     protected virtual void OnExitEffect() { }
+
+    public void SetCookieDepth(float depth)
+    {
+        _cookieDepthf = depth;
+    }
 }

@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 17591012}
   m_Layer: 0
-  m_Name: Manager----------------------------------------
+  m_Name: -------------------------------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -710,7 +710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 231312536}
   m_Layer: 0
-  m_Name: Environment----------------------------------
+  m_Name: -------------------------------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -976,7 +976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 780878304}
   m_Layer: 0
-  m_Name: 'Player---------------------------------- '
+  m_Name: -------------------------------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1056,7 +1056,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dff7bd2d230e54da82d3296fb6468d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  movementSpeedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   jumpForce: 5
   speedMultiplier: 1
 --- !u!4 &815528237
@@ -1824,6 +1829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1014927836}
+  _staminaMax: 0
 --- !u!50 &1485700167
 Rigidbody2D:
   serializedVersion: 5
@@ -2041,7 +2047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1680833924}
   m_Layer: 0
-  m_Name: Controls-----------------------------------------
+  m_Name: -------------------------------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2159,7 +2165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1891942537}
   m_Layer: 0
-  m_Name: Cameras---------------------------------------
+  m_Name: -------------------------------------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2558,7 +2564,6 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1891942537}
   - {fileID: 622451989}
   - {fileID: 1014927837}
   - {fileID: 17591012}
@@ -2574,3 +2579,4 @@ SceneRoots:
   - {fileID: 167884925}
   - {fileID: 780878304}
   - {fileID: 815528237}
+  - {fileID: 1891942537}
