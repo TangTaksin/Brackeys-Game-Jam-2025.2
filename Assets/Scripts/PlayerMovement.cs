@@ -86,9 +86,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(DipInput dinput)
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // reset Y before jump
-        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        grounded = false;
+        if (grounded == true)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // reset Y before jump
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            grounded = false;
+        }
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
