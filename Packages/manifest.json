@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.seanba.super-tiled2unity": "file:C:/Users/Daggoot/Downloads/Compressed/com.seanba.super-tiled2unity",
     "com.unity.2d.pixel-perfect": "5.1.0",
     "com.unity.cinemachine": "3.1.4",
     "com.unity.collab-proxy": "2.9.2",
