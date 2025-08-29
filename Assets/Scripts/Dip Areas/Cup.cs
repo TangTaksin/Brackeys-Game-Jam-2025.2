@@ -10,8 +10,6 @@ public class Cup : DipArea
     [Space]
     [SerializeField] DipArea[] containedDipAreas;
 
-    float _cookieDepthf;
-
     private void Start()
     {
         Init();
@@ -24,8 +22,6 @@ public class Cup : DipArea
 
     private void FixedUpdate()
     {
-        TrackCookieDepth();
-
         ReduceCookieStamina();
     }
 
@@ -36,7 +32,7 @@ public class Cup : DipArea
 
     protected override void OnStayEffect()
     {
-        
+        TrackCookieDepth();
     }
 
     protected override void OnExitEffect()
@@ -56,16 +52,22 @@ public class Cup : DipArea
             // map top and bottom to 0.0 - 1.0
             // get where cookie_y sit at between 0.0 - 1.0
             _cookieDepthf = ExtensionMethod.Remap(cookie_y, top_y, bottom_y, 0, 1);
+            Mathf.Clamp(_cookieDepthf, 0, 1);
 
-
+            foreach (var dArea in containedDipAreas)
+            {
+                dArea.SetCookieDepth(_cookieDepthf);
+            }
         }
     }
 
     void ReduceCookieStamina()
     {
-        var relative_depth = _staminaReductionCurve.Evaluate(_cookieDepthf);
-
-        _cookie?.ReduceStamina(relative_depth);
+        if (_cookieDepthf > 0)
+        {
+            var relative_depth = _staminaReductionCurve.Evaluate(_cookieDepthf);
+            _cookie?.ReduceStamina(relative_depth);
+        }
     }
 }
 

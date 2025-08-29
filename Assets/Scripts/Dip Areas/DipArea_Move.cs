@@ -15,6 +15,12 @@ public class DipArea_Move : DipArea
         OnAreaEnter?.Invoke(_input);
     }
 
+    protected override void OnStayEffect()
+    {
+        _input.f_value = _cookieDepthf;
+        OnAreaStay?.Invoke(_input);
+    }
+
     protected override void OnExitEffect()
     {
         _input.is_inputing = false;
