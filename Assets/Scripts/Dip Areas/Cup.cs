@@ -63,11 +63,8 @@ public class Cup : DipArea
 
     void ReduceCookieStamina()
     {
-        if (_cookieDepthf > 0)
-        {
-            var relative_depth = _staminaReductionCurve.Evaluate(_cookieDepthf);
-            _cookie?.ReduceStamina(relative_depth);
-        }
+        var relative_depth = _staminaReductionCurve.Evaluate(_cookieDepthf);
+        _cookie?.ReduceStamina(relative_depth);
     }
 }
 
