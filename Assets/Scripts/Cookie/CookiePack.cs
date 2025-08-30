@@ -69,7 +69,7 @@ public class CookiePack : MonoBehaviour
         cookie_remain--;
         Mathf.Clamp(cookie_remain, 0, cookieLimit);
 
-        if (cookie_remain <= 0)
+        if (cookie_remain <= 0 && !GameManager.Instance._inWinState)
         {
             GameManager.Instance.RestartScene();
             NoCookieLeftEvent?.Invoke();
