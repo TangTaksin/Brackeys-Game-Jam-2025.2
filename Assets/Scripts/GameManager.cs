@@ -6,12 +6,37 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public bool _inWinState;
+    enum gameState
+    {
+        playing,
+        win,
+        lose
+    }
+    gameState _currentGameState;
+
+    public enum gameoverType
+    {
+        smiley_down,
+        cookie_out,
+        overdipped,
+    }
+
+    [SerializeField] float _gameoverDelay = 2.5f;
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    private void Start()
+    {
+        Init();
+    }
+
+    void Init()
+    {
+        _currentGameState = gameState.playing;
     }
 
     void Update()
@@ -23,12 +48,30 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void GameOver()
+    public void GameOver(gameoverType state)
     {
-        Debug.Log("💀 Game Over!");
+        if (_currentGameState == gameState.win 
+            || _currentGameState == gameState.lose)
+            return;
 
-        
-        // TODO: เพิ่ม UI หรือ restart
+        _currentGameState = gameState.lose;
+
+        switch (state)
+        {
+            case gameoverType.smiley_down:
+
+                break;
+
+            case gameoverType.cookie_out:
+
+                break;
+
+            case gameoverType.overdipped:
+
+                break;
+        }
+
+        Invoke("RestartScene", _gameoverDelay);
     }
 
     public void RestartScene()
@@ -47,8 +90,10 @@ public class GameManager : MonoBehaviour
     
     public void Win()
     {
+        if (_currentGameState == gameState.lose)
+
         Debug.Log("🎉 You Win!");
-        _inWinState = true;
+        _currentGameState = gameState.win;
         Transition.CalledFadeIn?.Invoke();
         Transition.FadeInOver += LoadNextScene;
     }
@@ -72,6 +117,6 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        _inWinState = false;
+        Init();
     }
 }

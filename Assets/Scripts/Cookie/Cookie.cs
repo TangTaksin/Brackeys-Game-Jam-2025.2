@@ -14,6 +14,9 @@ public class Cookie : MonoBehaviour
     [SerializeField] float _returnSpeed = 5f;
     [SerializeField] float _returnThreshold = 0.25f;
 
+    [Space]
+    [SerializeField] GameObject _cookieChunkParticle;
+
     Rigidbody2D _body;
 
     float _stamina_current;
@@ -94,8 +97,6 @@ public class Cookie : MonoBehaviour
 
     void EatCookie()
     {
-        ResetStamina();
-
         OnCookieEaten?.Invoke();
     }
 
@@ -125,8 +126,12 @@ public class Cookie : MonoBehaviour
 
         if (stamina_current <= 0)
         {
-            GameManager.Instance.RestartScene();
-            
+            GameManager.Instance.GameOver(GameManager.gameoverType.overdipped);
+
+            _cookieChunkParticle.transform.position = transform.position;
+            Instantiate(_cookieChunkParticle);
+
+            gameObject.SetActive(false);
         }
     }
 

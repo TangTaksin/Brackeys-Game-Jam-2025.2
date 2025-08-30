@@ -31,7 +31,7 @@ public class CookieController : MonoBehaviour
                     Destroy(cookieVisual.gameObject); // ทำลายคุกกี้
 
                 OnDip?.Invoke(false); // ส่งสัญญาณหยุด Player
-                GameManager.Instance.GameOver();
+                //GameManager.Instance.GameOver();
             }
         }
 
