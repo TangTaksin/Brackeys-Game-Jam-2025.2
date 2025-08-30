@@ -22,10 +22,8 @@ public class FallingPlatform : Platform
         // Falling handled by physics after trigger
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter2D(collision);
-
         if (!triggered && collision.gameObject.CompareTag("Player"))
         {
             triggered = true;

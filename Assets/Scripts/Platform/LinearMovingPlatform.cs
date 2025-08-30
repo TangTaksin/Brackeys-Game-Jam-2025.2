@@ -2,33 +2,46 @@ using UnityEngine;
 
 public class LinearMovingPlatform : Platform
 {
-    [SerializeField] private Vector2 moveDirection = Vector2.right; // Default move right
+    [SerializeField] private Vector2 moveDirection = Vector2.right;
     [SerializeField] private float distance = 5f;
 
     private Vector3 startPos;
-    private Vector3 targetPos;
+    private Vector3 endPos;
+    private bool movingToEnd = true;
 
     protected override void Awake()
     {
         base.Awake();
         startPos = platformTransform.position;
-        targetPos = startPos + (Vector3)(moveDirection.normalized * distance);
+        endPos = startPos + (Vector3)(moveDirection.normalized * distance);
     }
 
     protected override void Move()
     {
-        platformTransform.position = Vector3.MoveTowards(
-            platformTransform.position,
-            targetPos,
-            speed * Time.deltaTime
-        );
-
-        if (Vector3.Distance(platformTransform.position, targetPos) < 0.05f)
+        if (movingToEnd)
         {
-            // Swap between start and target
-            targetPos = (targetPos == startPos)
-                ? startPos + (Vector3)(moveDirection.normalized * distance)
-                : startPos;
+            platformTransform.position = Vector3.MoveTowards(platformTransform.position, endPos, speed * Time.deltaTime);
+            if (Vector3.Distance(platformTransform.position, endPos) < 0.05f)
+                movingToEnd = false;
         }
+        else
+        {
+            platformTransform.position = Vector3.MoveTowards(platformTransform.position, startPos, speed * Time.deltaTime);
+            if (Vector3.Distance(platformTransform.position, startPos) < 0.05f)
+                movingToEnd = true;
+        }
+    }
+
+    // ทำให้ Player ติดไปกับ Platform
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            collision.transform.SetParent(transform);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+            collision.transform.SetParent(null);
     }
 }

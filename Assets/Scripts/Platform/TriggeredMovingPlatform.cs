@@ -39,9 +39,8 @@ public class TriggeredMovingPlatform : Platform
         }
     }
 
-    protected override void OnCollisionEnter2D(Collision2D collision)
+    protected  void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter2D(collision);
 
         if (collision.gameObject.CompareTag("Player"))
         {
@@ -49,9 +48,8 @@ public class TriggeredMovingPlatform : Platform
         }
     }
 
-    protected override void OnCollisionExit2D(Collision2D collision)
+    protected  void OnCollisionExit2D(Collision2D collision)
     {
-        base.OnCollisionExit2D(collision);
 
         if (collision.gameObject.CompareTag("Player"))
         {
