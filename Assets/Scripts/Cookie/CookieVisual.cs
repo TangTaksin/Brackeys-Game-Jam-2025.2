@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// for draging cookie back when the mouse is release.
 public class CookieVisual : MonoBehaviour
 {
     public Transform cookie;
