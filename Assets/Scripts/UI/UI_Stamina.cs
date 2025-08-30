@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening; // DOTween
+using DG.Tweening;
 
 public class UI_Stamina : MonoBehaviour
 {
     [SerializeField] Image staminaFillImage;
     [SerializeField] float smoothSpeed = 5f;
-    [SerializeField] float lowStaminaThreshold = 0.2f; // เหลือต่ำกว่า 20% ถือว่าใกล้หมด
+    [SerializeField] float lowStaminaThreshold = 0.2f;
 
     Transform _cookieTransform;
     float targetFill = 1f;
-    Tween pulseTween; // เก็บ tween ที่วิ่งอยู่ป้องกันซ้อนกัน
+    Tween pulseTween;
 
     private void OnEnable()
     {
@@ -26,7 +26,30 @@ public class UI_Stamina : MonoBehaviour
     private void OnDisable()
     {
         UnsubscribeEvents();
-        pulseTween?.Kill();
+
+        // Kill tween ทั้งหมดที่เกี่ยวข้อง
+        DOTween.Kill(transform);
+        DOTween.Kill(staminaFillImage);
+
+        if (pulseTween != null)
+        {
+            pulseTween.Kill();
+            pulseTween = null;
+        }
+
+        transform.localScale = Vector3.one;
+    }
+
+    private void OnDestroy()
+    {
+        DOTween.Kill(transform);
+        DOTween.Kill(staminaFillImage);
+
+        if (pulseTween != null)
+        {
+            pulseTween.Kill();
+            pulseTween = null;
+        }
     }
 
     #region event subscription
@@ -52,8 +75,10 @@ public class UI_Stamina : MonoBehaviour
 
     void UpdateGuagePosition()
     {
+        if (_cookieTransform == null) return;
+
         Vector3 targetPos = _cookieTransform.position;
-        targetPos.z = transform.position.z; // keep current Z
+        targetPos.z = transform.position.z;
         transform.position = targetPos;
     }
 
@@ -61,12 +86,12 @@ public class UI_Stamina : MonoBehaviour
     {
         targetFill = Mathf.Clamp01(curf / maxf);
 
+        if (staminaFillImage == null) return;
+
         if (targetFill <= lowStaminaThreshold)
         {
-            // เปลี่ยนสีเป็นแดง
             staminaFillImage.DOColor(Color.red, 0.2f);
 
-            // ถ้ายังไม่มี pulse ให้เริ่ม
             if (pulseTween == null || !pulseTween.IsActive())
             {
                 pulseTween = transform.DOScale(1.1f, 0.4f)
@@ -76,13 +101,12 @@ public class UI_Stamina : MonoBehaviour
         }
         else
         {
-            // กลับสีขาว
             staminaFillImage.DOColor(Color.white, 0.2f);
 
-            // หยุด pulse กลับเป็น scale เดิม
             if (pulseTween != null)
             {
                 pulseTween.Kill();
+                pulseTween = null;
                 transform.DOScale(1f, 0.2f);
             }
         }
@@ -90,7 +114,7 @@ public class UI_Stamina : MonoBehaviour
 
     void SmoothUpdateFill()
     {
-        if (!staminaFillImage) return;
+        if (staminaFillImage == null) return;
         staminaFillImage.fillAmount = Mathf.Lerp(staminaFillImage.fillAmount, targetFill, smoothSpeed * Time.deltaTime);
     }
 }
