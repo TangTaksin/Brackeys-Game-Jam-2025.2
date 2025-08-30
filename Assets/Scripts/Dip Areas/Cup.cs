@@ -11,6 +11,9 @@ public class Cup : DipArea
     [Header("Contained Dip Areas")]
     [SerializeField] DipArea[] containedDipAreas;
 
+    [Space]
+    [SerializeField] ParticleSystem _milkSplashParticle;
+
     private void Start()
     {
         Init();
@@ -28,7 +31,7 @@ public class Cup : DipArea
 
     protected override void OnEnterEffect()
     {
-
+        PlaySplash();
     }
 
     protected override void OnStayEffect()
@@ -38,7 +41,13 @@ public class Cup : DipArea
 
     protected override void OnExitEffect()
     {
+        PlaySplash();
+    }
 
+    void PlaySplash()
+    {
+        if (_milkSplashParticle)
+            _milkSplashParticle.Play();
     }
 
     void TrackCookieDepth()
