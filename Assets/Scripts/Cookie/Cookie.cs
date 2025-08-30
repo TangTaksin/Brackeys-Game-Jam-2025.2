@@ -43,7 +43,13 @@ public class Cookie : MonoBehaviour
     public void Init()
     {
         ResetStamina();
+
         _body = GetComponent<Rigidbody2D>();
+
+        if (!cam)
+            cam = Camera.allCameras[1];
+        if (!defaultPosition)
+            defaultPosition = GameObject.Find("top_position").transform;
 
         OnInit?.Invoke(this);
     }
