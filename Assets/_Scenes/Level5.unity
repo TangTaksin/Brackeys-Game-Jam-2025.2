@@ -2020,6 +2020,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: -6136428121438387779, guid: f607d4ca380585f449d5de36cd42b496, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: -5417958970615943610, guid: f607d4ca380585f449d5de36cd42b496, type: 3}
       propertyPath: m_Name
       value: Level5
@@ -2068,6 +2072,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 5925422897665513311, guid: f607d4ca380585f449d5de36cd42b496, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8be2c0657a6119d4eaae53eaa8bab922, type: 2}
     - target: {fileID: 6662730243987660302, guid: f607d4ca380585f449d5de36cd42b496, type: 3}
       propertyPath: m_TagString
       value: Ground
