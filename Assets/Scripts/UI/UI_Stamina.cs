@@ -48,7 +48,9 @@ public class UI_Stamina : MonoBehaviour
 
     void UpdateGuagePosition()
     {
-        transform.position = _cookieTransform.position;
+        Vector3 targetPos = _cookieTransform.position;
+        targetPos.z = transform.position.z; // keep current Z
+        transform.position = targetPos;
     }
 
     void UpdateGuageValue(float curf, float maxf)
