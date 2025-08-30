@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3376795994155117915}
   - component: {fileID: 1363979161007077246}
   - component: {fileID: 3753872059884680274}
-  - component: {fileID: 1819313984420029296}
   - component: {fileID: 8600565018698277068}
   m_Layer: 0
   m_Name: Cookie
@@ -154,21 +153,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1819313984420029296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4138462349118109069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a128b390ee0474d896250080d74cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cookie: {fileID: 1966082224823595483}
-  topPosition: {fileID: 0}
-  moveSpeed: 5
 --- !u!114 &8600565018698277068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,4 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  defaultPosition: {fileID: 0}
   _staminaMax: 200
+  _returnSpeed: 5
+  _returnThreshold: 0.1

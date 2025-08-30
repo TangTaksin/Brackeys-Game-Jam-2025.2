@@ -54,4 +54,6 @@ public class UI_Stamina : MonoBehaviour
 
         staminaFillImage.fillAmount = fillvalue;
     }
+
+
 }

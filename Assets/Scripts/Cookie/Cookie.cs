@@ -1,7 +1,7 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Cookie : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class Cookie : MonoBehaviour
         }
     }
 
-    
+    Vector2 _cursorOffset;
     bool _isReturning;
 
     public static Action<Cookie> OnInit;
@@ -38,12 +38,15 @@ public class Cookie : MonoBehaviour
 
     public void Init()
     {
-        stamina_current = _staminaMax;
+        ResetStamina();
 
         OnInit?.Invoke(this);
     }
 
-    
+    void ResetStamina()
+    {
+        stamina_current = _staminaMax;
+    }
 
     private void Update()
     {
@@ -57,7 +60,9 @@ public class Cookie : MonoBehaviour
     
     void OnMouseDown()
     {
-
+        var cursor = Mouse.current.position.ReadValue();
+        var wCursor = cam.ScreenToWorldPoint(cursor);
+        _cursorOffset =  transform.position - wCursor;
     }
 
     private void OnMouseUp()
@@ -71,15 +76,18 @@ public class Cookie : MonoBehaviour
             return;
 
         var cursor = Mouse.current.position.ReadValue();
-        var newPos = cam.ScreenToWorldPoint(cursor);
+        var newPos = cam.ScreenToWorldPoint(cursor) + (Vector3)_cursorOffset;
         transform.position = new Vector2(newPos.x, newPos.y);
     }
 
     void EatCookie()
     {
-        Init();
+        ResetStamina();
+
         OnCookieEaten?.Invoke();
     }
+
+
 
     void RepositionCookie()
     {
