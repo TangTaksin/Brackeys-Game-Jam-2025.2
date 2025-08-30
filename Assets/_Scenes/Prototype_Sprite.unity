@@ -1518,6 +1518,37 @@ MonoBehaviour:
     m_RotationOrder: 4
   jumpForce: 5
   speedMultiplier: 1
+--- !u!1 &846387819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846387820}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &846387820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846387819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 948492729}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &857210965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1729,53 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &948492727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948492729}
+  - component: {fileID: 948492728}
+  m_Layer: 0
+  m_Name: Cookie Pack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &948492728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948492727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a2d6c6780827742ba5ae5e4c5ba031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnpoint: {fileID: 597875967}
+  cookieObject: {fileID: 1485700161}
+--- !u!4 &948492729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948492727}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.8199997, y: -15.44, z: 0.05715628}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 846387820}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &959963368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2335,8 +2413,6 @@ GameObject:
   - component: {fileID: 1485700164}
   - component: {fileID: 1485700163}
   - component: {fileID: 1485700162}
-  - component: {fileID: 1485700168}
-  - component: {fileID: 1485700165}
   - component: {fileID: 1485700166}
   - component: {fileID: 1485700167}
   m_Layer: 0
@@ -2452,20 +2528,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1485700165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485700161}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec0139bb0edf5149b6082aab7009ff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDipTime: 3
-  cookieVisual: {fileID: 1485700164}
 --- !u!114 &1485700166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2479,7 +2541,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1014927836}
+  defaultPosition: {fileID: 597875967}
   _staminaMax: 500
+  _returnSpeed: 5
+  _returnThreshold: 0.1
 --- !u!50 &1485700167
 Rigidbody2D:
   serializedVersion: 5
@@ -2507,21 +2572,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1485700168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485700161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a128b390ee0474d896250080d74cc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cookie: {fileID: 1485700164}
-  topPosition: {fileID: 597875967}
-  moveSpeed: 5
 --- !u!1 &1494975028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,7 +2783,7 @@ GameObject:
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1644903586
 Transform:
   m_ObjectHideFlags: 0
@@ -3643,6 +3693,7 @@ SceneRoots:
   - {fileID: 17591012}
   - {fileID: 1209518668}
   - {fileID: 1680833924}
+  - {fileID: 948492729}
   - {fileID: 1485700164}
   - {fileID: 1963480520}
   - {fileID: 597875967}
