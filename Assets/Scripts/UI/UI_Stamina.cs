@@ -4,8 +4,10 @@ using UnityEngine.UI;
 public class UI_Stamina : MonoBehaviour
 {
     [SerializeField] Image staminaFillImage;
+    [SerializeField] float smoothSpeed = 5f;
 
     Transform _cookieTransform;
+    float targetFill = 1f;
 
     private void OnEnable()
     {
@@ -15,6 +17,7 @@ public class UI_Stamina : MonoBehaviour
     private void Update()
     {
         UpdateGuagePosition();
+        SmoothUpdateFill();
     }
 
     private void OnDisable()
@@ -50,8 +53,12 @@ public class UI_Stamina : MonoBehaviour
 
     void UpdateGuageValue(float curf, float maxf)
     {
-        var fillvalue = curf / maxf;
+        targetFill = Mathf.Clamp01(curf / maxf);
+    }
 
-        staminaFillImage.fillAmount = fillvalue;
+    void SmoothUpdateFill()
+    {
+        if (!staminaFillImage) return;
+        staminaFillImage.fillAmount = Mathf.Lerp(staminaFillImage.fillAmount, targetFill, smoothSpeed * Time.deltaTime);
     }
 }

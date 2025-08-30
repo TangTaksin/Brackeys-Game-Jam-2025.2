@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Cookie : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] Camera cam;
     [SerializeField] Transform defaultPosition;
-
-    [Space]
+    
+    [Header("Stamina Settings")]
     [SerializeField] float _staminaMax;
     [SerializeField] float _returnSpeed = 5f;
     [SerializeField] float _returnThreshold = 0.25f;
@@ -17,14 +18,13 @@ public class Cookie : MonoBehaviour
     float stamina_current
     {
         get { return _stamina_current; }
-        set 
-        { 
-            _stamina_current = value; 
-            OnStaminaUpdate?.Invoke(_stamina_current, _staminaMax); 
+        set
+        {
+            _stamina_current = value;
+            OnStaminaUpdate?.Invoke(_stamina_current, _staminaMax);
         }
     }
 
-    
     bool _isReturning;
 
     public static Action<Cookie> OnInit;
@@ -43,8 +43,6 @@ public class Cookie : MonoBehaviour
         OnInit?.Invoke(this);
     }
 
-    
-
     private void Update()
     {
         RepositionCookie();
@@ -54,7 +52,7 @@ public class Cookie : MonoBehaviour
     {
         GrabCookie();
     }
-    
+
     void OnMouseDown()
     {
 
@@ -83,15 +81,13 @@ public class Cookie : MonoBehaviour
 
     void RepositionCookie()
     {
-        if (!defaultPosition) 
+        if (!defaultPosition)
             return;
 
         if (_isReturning)
         {
-            // ค่อย ๆ กลับไป topPosition
             transform.position = Vector3.Lerp(transform.position, defaultPosition.position, _returnSpeed * Time.deltaTime);
 
-            // ถ้าใกล้ถึง topPosition ให้ตรงพอดี
             if (Vector3.Distance(transform.position, defaultPosition.position) < _returnThreshold)
             {
                 EatCookie();

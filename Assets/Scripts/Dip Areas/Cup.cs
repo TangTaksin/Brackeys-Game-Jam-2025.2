@@ -3,11 +3,12 @@ using UnityEngine.UI;
 
 public class Cup : DipArea
 {
-
     [SerializeField] Transform _cupTopPoint, _cupBottomPoint;
-    [Space]
+
+    [Header("Stamina Reduction")]
     [SerializeField] AnimationCurve _staminaReductionCurve;
-    [Space]
+   
+    [Header("Contained Dip Areas")]
     [SerializeField] DipArea[] containedDipAreas;
 
     private void Start()
@@ -17,7 +18,7 @@ public class Cup : DipArea
 
     void Init()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -37,7 +38,7 @@ public class Cup : DipArea
 
     protected override void OnExitEffect()
     {
-        
+
     }
 
     void TrackCookieDepth()

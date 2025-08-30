@@ -5,20 +5,21 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public AnimationCurve movementSpeedCurve;
+    [SerializeField] private AnimationCurve movementSpeedCurve;
     [SerializeField] private float brakeTime = 2f;
-    public float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpSpeedBoost = 1.2f;
 
-    private bool moving = false;
-    float moveInputvalue;
+    [Header("Runtime Values")]
+    [HideInInspector] public float speedMultiplier = 1f;
 
+    private bool isMoving = false;
+    private float moveInputValue;
     private bool isAlive = true;
-    private bool grounded = false;
+    private bool isGrounded = false;
 
     private Rigidbody2D rb;
 
-    [HideInInspector] public float speedMultiplier = 1f;
-    [SerializeField] private float jumpSpeedBoost = 1.2f;
 
 
     void Start()
@@ -68,26 +69,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            moving = dinput.is_inputing;
-            moveInputvalue = dinput.f_value;
+            isMoving = dinput.is_inputing;
+            moveInputValue = dinput.f_value;
         }
     }
 
     public void StopPlayer()
     {
         isAlive = false;
-        moving = false;
+        isMoving = false;
         rb.linearVelocity = Vector2.zero;
     }
 
     public void HandleMovement()
     {
-        if (moving && grounded)
+        if (isMoving && isGrounded)
         {
-            var trueSpeed = movementSpeedCurve.Evaluate(moveInputvalue);
+            var trueSpeed = movementSpeedCurve.Evaluate(moveInputValue);
             rb.linearVelocity = new Vector2(trueSpeed * speedMultiplier, rb.linearVelocity.y);
         }
-        else if (grounded)
+        else if (isGrounded)
         {
             float deceleration = Mathf.Abs(rb.linearVelocity.x) / brakeTime;
             float newX = Mathf.MoveTowards(rb.linearVelocity.x, 0, deceleration * Time.deltaTime);
@@ -104,15 +105,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(DipInput dinput)
     {
-        if (grounded == true)
+        if (isGrounded == true)
         {
             // Calculate speed boost based on input direction
-            float horizontalBoost = moveInputvalue * jumpSpeedBoost;
+            float horizontalBoost = moveInputValue * jumpSpeedBoost;
             float newXVelocity = rb.linearVelocity.x + horizontalBoost;
 
             rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            grounded = false;
+            isGrounded = false;
         }
     }
 
@@ -120,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
-            grounded = true;
+            isGrounded = true;
         }
     }
 }

@@ -1168,6 +1168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaFillImage: {fileID: 93120935}
+  smoothSpeed: 5
 --- !u!1 &1992676746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,6 +1573,10 @@ PrefabInstance:
       propertyPath: defaultPosition
       value: 
       objectReference: {fileID: 597875967}
+    - target: {fileID: 8600565018698277068, guid: a5625416f0c908f4098c17a3fbcf3e57, type: 3}
+      propertyPath: _returnThreshold
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
