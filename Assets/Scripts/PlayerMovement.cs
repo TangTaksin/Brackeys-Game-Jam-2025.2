@@ -101,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (!isAlive) return;
         StopPlayer();
         Destroy(this.gameObject);
+        GameManager.Instance.RestartScene();
     }
 
     private void OnJump(DipInput dinput)
