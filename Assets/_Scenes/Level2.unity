@@ -1486,6 +1486,10 @@ PrefabInstance:
       propertyPath: _staminaMax
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 8600565018698277068, guid: a5625416f0c908f4098c17a3fbcf3e57, type: 3}
+      propertyPath: defaultPosition
+      value: 
+      objectReference: {fileID: 597875967}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
