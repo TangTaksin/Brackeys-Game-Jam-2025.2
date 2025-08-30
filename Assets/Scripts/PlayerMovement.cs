@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public AnimationCurve movementSpeedCurve;
+    [SerializeField] private float brakeTime = 2f;
     public float jumpForce = 5f;
 
     private bool moving = false;
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [HideInInspector] public float speedMultiplier = 1f;
+    
 
     void Start()
     {
@@ -84,8 +86,14 @@ public class PlayerMovement : MonoBehaviour
             var trueSpeed = movementSpeedCurve.Evaluate(moveInputvalue);
             rb.linearVelocity = new Vector2(trueSpeed * speedMultiplier, rb.linearVelocity.y);
         }
-        //else
-            //rb.linearVelocity = new Vector2(rb.linearVelocity., rb.linearVelocity.y);
+        else if(grounded)
+        {
+            float deceleration = Mathf.Abs(rb.linearVelocity.x) / brakeTime;
+            float newX = Mathf.MoveTowards(rb.linearVelocity.x, 0, deceleration * Time.deltaTime);
+            rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
+
+        }
+
     }
 
     public void Die()
@@ -103,8 +111,6 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             grounded = false;
         }
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
