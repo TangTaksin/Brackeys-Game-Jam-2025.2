@@ -10,7 +10,6 @@ public class CookiePack : MonoBehaviour
 
     [Space]
     [SerializeField] int cookieLimit = 5;
-    [SerializeField] float tweenTime = .5f;
 
     int _cookie_remain;
     int cookie_remain

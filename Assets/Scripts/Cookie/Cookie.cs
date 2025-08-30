@@ -14,6 +14,8 @@ public class Cookie : MonoBehaviour
     [SerializeField] float _returnSpeed = 5f;
     [SerializeField] float _returnThreshold = 0.25f;
 
+    Rigidbody2D _body;
+
     float _stamina_current;
     float stamina_current
     {
@@ -22,6 +24,7 @@ public class Cookie : MonoBehaviour
         {
             _stamina_current = value;
             OnStaminaUpdate?.Invoke(_stamina_current, _staminaMax);
+
         }
     }
 
@@ -40,6 +43,7 @@ public class Cookie : MonoBehaviour
     public void Init()
     {
         ResetStamina();
+        _body = GetComponent<Rigidbody2D>();
 
         OnInit?.Invoke(this);
     }
@@ -78,7 +82,8 @@ public class Cookie : MonoBehaviour
 
         var cursor = Mouse.current.position.ReadValue();
         var newPos = cam.ScreenToWorldPoint(cursor) + (Vector3)_cursorOffset;
-        transform.position = new Vector2(newPos.x, newPos.y);
+
+        _body.MovePosition(new Vector2(transform.position.x, newPos.y));
     }
 
     void EatCookie()
