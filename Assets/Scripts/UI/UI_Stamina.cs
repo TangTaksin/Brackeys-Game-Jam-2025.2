@@ -61,4 +61,6 @@ public class UI_Stamina : MonoBehaviour
         if (!staminaFillImage) return;
         staminaFillImage.fillAmount = Mathf.Lerp(staminaFillImage.fillAmount, targetFill, smoothSpeed * Time.deltaTime);
     }
+
+
 }
