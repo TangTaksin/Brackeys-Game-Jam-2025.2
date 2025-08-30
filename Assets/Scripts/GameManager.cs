@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         overdipped,
     }
 
-    [SerializeField] float _gameoverDelay = 2.5f;
+    [SerializeField] float _gameoverDelay = 0.5f;
 
     void Awake()
     {
