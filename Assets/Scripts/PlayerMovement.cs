@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [HideInInspector] public float speedMultiplier = 1f;
-    
+    [SerializeField] private float jumpSpeedBoost = 1.2f;
+
 
     void Start()
     {
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         DipArea_Jump.OnAreaEnter -= OnJump;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleMovement();
     }
@@ -86,14 +87,12 @@ public class PlayerMovement : MonoBehaviour
             var trueSpeed = movementSpeedCurve.Evaluate(moveInputvalue);
             rb.linearVelocity = new Vector2(trueSpeed * speedMultiplier, rb.linearVelocity.y);
         }
-        else if(grounded)
+        else if (grounded)
         {
             float deceleration = Mathf.Abs(rb.linearVelocity.x) / brakeTime;
             float newX = Mathf.MoveTowards(rb.linearVelocity.x, 0, deceleration * Time.deltaTime);
             rb.linearVelocity = new Vector2(newX, rb.linearVelocity.y);
-
         }
-
     }
 
     public void Die()
@@ -107,7 +106,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (grounded == true)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); // reset Y before jump
+            // Calculate speed boost based on input direction
+            float horizontalBoost = moveInputvalue * jumpSpeedBoost;
+            float newXVelocity = rb.linearVelocity.x + horizontalBoost;
+
+            rb.linearVelocity = new Vector2(newXVelocity, rb.linearVelocity.y);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             grounded = false;
         }

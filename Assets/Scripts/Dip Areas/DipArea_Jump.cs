@@ -14,4 +14,18 @@ public class DipArea_Jump : DipArea
         _input.is_inputing = true;
         OnAreaEnter?.Invoke(_input);
     }
+    
+    void FixedUpdate()
+    {
+        TriggerJump();
+    }
+
+    private void TriggerJump()
+    {
+        if (_cookie)
+        {
+            _input.is_inputing = true;
+            OnAreaEnter?.Invoke(_input);
+        }
+    }
 }
