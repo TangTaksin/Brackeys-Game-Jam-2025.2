@@ -1,14 +1,16 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Transition : MonoBehaviour
 {
     Animator _animator;
 
-    public static Action CalledFadeIn,CallFadeOut;
+    public delegate void TransitionEvent();
+    public static TransitionEvent CalledFadeIn,CallFadeOut;
 
-    public static Action FadeInOver, FadeOutOver;
+    public static TransitionEvent FadeInOver, FadeOutOver;
+
 
     private void Awake()
     {
@@ -31,15 +33,14 @@ public class Transition : MonoBehaviour
         _animator.Play("generic_transition_in");
     }
 
-    public void PlayFadeOut()
-    {
-        _animator.Play("generic_transition_out");
-    }
-    
-
     public void FinishFadeIn()
     {
         FadeInOver?.Invoke();
+    }
+
+    public void PlayFadeOut()
+    {
+        _animator.Play("generic_transition_out");
     }
 
     public void FinishFadeOut()
