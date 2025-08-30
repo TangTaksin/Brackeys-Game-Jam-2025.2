@@ -647,7 +647,7 @@ Transform:
   m_GameObject: {fileID: 622451985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.4309115, y: 0.58545005, z: -10}
+  m_LocalPosition: {x: -7.4288926, y: 0.58546996, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1333,6 +1333,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaFillImage: {fileID: 93120935}
   smoothSpeed: 5
+  shakeDuration: 0.3
+  shakeStrength: 0.1
+  vibrato: 5
+  lowStaminaThreshold: 0.2
 --- !u!1 &1992676746
 GameObject:
   m_ObjectHideFlags: 0
