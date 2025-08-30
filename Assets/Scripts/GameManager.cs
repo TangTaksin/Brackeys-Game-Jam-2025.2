@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
     void Init()
     {
         _currentGameState = gameState.playing;
+        DOTween.KillAll();
     }
 
     void Update()
@@ -85,6 +87,8 @@ public class GameManager : MonoBehaviour
         Transition.FadeInOver -= LoadCurrentScene;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        Init();
     }
     
     
@@ -116,6 +120,7 @@ public class GameManager : MonoBehaviour
             // Optional: Loop back to first scene or show end game UI
             SceneManager.LoadScene(0);
         }
+
 
         Init();
     }

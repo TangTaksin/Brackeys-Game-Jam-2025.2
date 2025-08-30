@@ -97,6 +97,8 @@ public class Cookie : MonoBehaviour
 
     void EatCookie()
     {
+        ResetStamina();
+
         OnCookieEaten?.Invoke();
     }
 

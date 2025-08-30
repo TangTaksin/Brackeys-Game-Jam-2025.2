@@ -263,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   remainText: {fileID: 1169232982768039780}
+  _cookieChunkParticle: {fileID: 2320359158044277070, guid: dfd93ce1431ffda4091df2d74b3e9f38, type: 3}
 --- !u!1 &9118382447119498312
 GameObject:
   m_ObjectHideFlags: 0
