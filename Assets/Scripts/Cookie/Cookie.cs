@@ -8,7 +8,7 @@ public class Cookie : MonoBehaviour
     [Header("References")]
     [SerializeField] Camera cam;
     [SerializeField] Transform defaultPosition;
-    
+
     [Header("Stamina Settings")]
     [SerializeField] float _staminaMax;
     [SerializeField] float _returnSpeed = 5f;
@@ -63,7 +63,7 @@ public class Cookie : MonoBehaviour
     {
         var cursor = Mouse.current.position.ReadValue();
         var wCursor = cam.ScreenToWorldPoint(cursor);
-        _cursorOffset =  transform.position - wCursor;
+        _cursorOffset = transform.position - wCursor;
     }
 
     private void OnMouseUp()
@@ -111,6 +111,12 @@ public class Cookie : MonoBehaviour
     {
         stamina_current -= amount;
         Mathf.Clamp(stamina_current, 0, _staminaMax);
+
+        if (stamina_current <= 0)
+        {
+            GameManager.Instance.RestartScene();
+            
+        }
     }
 
 }
