@@ -120,13 +120,16 @@ public class Cookie : MonoBehaviour
 
     public void ReduceStamina(float amount)
     {
+        if (_isReturning)
+            return;
+            
         stamina_current -= amount;
         Mathf.Clamp(stamina_current, 0, _staminaMax);
 
         if (stamina_current <= 0)
         {
             GameManager.Instance.RestartScene();
-            
+
         }
     }
 
