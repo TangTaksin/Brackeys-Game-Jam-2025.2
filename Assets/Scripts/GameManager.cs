@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public bool _inWinState;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -20,25 +22,41 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Win()
-    {
-        Debug.Log("🎉 You Win!");
-        LoadNextScene();
-    }
 
     public void GameOver()
     {
         Debug.Log("💀 Game Over!");
+
+        
         // TODO: เพิ่ม UI หรือ restart
     }
 
     public void RestartScene()
     {
+        Transition.CalledFadeIn?.Invoke();
+        Transition.FadeInOver += LoadCurrentScene;
+    }
+
+    public void LoadCurrentScene()
+    {
+        Transition.FadeInOver -= LoadCurrentScene;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    
+    public void Win()
+    {
+        Debug.Log("🎉 You Win!");
+        _inWinState = true;
+        Transition.CalledFadeIn?.Invoke();
+        Transition.FadeInOver += LoadNextScene;
     }
 
     public void LoadNextScene()
     {
+        Transition.FadeInOver -= LoadNextScene;
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
@@ -53,5 +71,7 @@ public class GameManager : MonoBehaviour
             // Optional: Loop back to first scene or show end game UI
             SceneManager.LoadScene(0);
         }
+
+        _inWinState = false;
     }
 }
