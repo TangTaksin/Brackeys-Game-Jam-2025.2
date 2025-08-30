@@ -568,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 622451985}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.469897, y: 0.92113996, z: -10}
+  m_LocalPosition: {x: -7.46508, y: 0.92135, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -732,8 +732,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Release to switch to a new cookie.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9a39f3202349f164eadffed0bf316f32, type: 2}
+  m_sharedMaterial: {fileID: 6479195262757677742, guid: 9a39f3202349f164eadffed0bf316f32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -757,8 +757,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.37
-  m_fontSizeBase: 0.37
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -983,7 +983,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.5, y: -3.3}
+  m_AnchoredPosition: {x: 4.5, y: -3.5}
   m_SizeDelta: {x: 9.22, y: 0.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272756058
@@ -1008,8 +1008,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Careful! Dipping Too long = lose cookie
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9a39f3202349f164eadffed0bf316f32, type: 2}
+  m_sharedMaterial: {fileID: 6479195262757677742, guid: 9a39f3202349f164eadffed0bf316f32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1033,8 +1033,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.37
-  m_fontSizeBase: 0.37
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1272,8 +1272,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: The deeper you dip, the faster the cookie moves!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9a39f3202349f164eadffed0bf316f32, type: 2}
+  m_sharedMaterial: {fileID: 6479195262757677742, guid: 9a39f3202349f164eadffed0bf316f32, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1297,8 +1297,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.37
-  m_fontSizeBase: 0.37
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1514,6 +1514,10 @@ PrefabInstance:
     - target: {fileID: 5072625024405714984, guid: ab2a2824572973b42b77244b0f947fe7, type: 3}
       propertyPath: m_Name
       value: ui_overlay_space
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072625024405714984, guid: ab2a2824572973b42b77244b0f947fe7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6861689534717759886, guid: ab2a2824572973b42b77244b0f947fe7, type: 3}
       propertyPath: m_Pivot.x
