@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +10,14 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartScene();
+        }
     }
 
     public void Win()
@@ -20,5 +30,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("💀 Game Over!");
         // TODO: เพิ่ม UI หรือ restart
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
