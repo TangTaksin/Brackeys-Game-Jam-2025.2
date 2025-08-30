@@ -73,8 +73,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   brakeTime: 1
   jumpForce: 6
-  speedMultiplier: 1
   jumpSpeedBoost: 1.2
+  speedMultiplier: 1
+  onDeadParticle: {fileID: 7025765980022097604, guid: 795978f5f46b4824a9ee81e5e662d59c, type: 3}
 --- !u!50 &4598620152393681128
 Rigidbody2D:
   serializedVersion: 5

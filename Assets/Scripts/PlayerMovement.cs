@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Runtime Values")]
     [HideInInspector] public float speedMultiplier = 1f;
 
+    [Space]
+    [SerializeField] GameObject onDeadParticle;
+
     private bool isMoving = false;
     private float moveInputValue;
     private bool isAlive = true;
@@ -100,9 +103,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAlive) return;
         StopPlayer();
+
+        onDeadParticle.transform.position = transform.position;
+        Instantiate(onDeadParticle);
+
+        GameManager.Instance.GameOver(GameManager.gameoverType.smiley_down);
+
         Destroy(this.gameObject);
-        GameManager.Instance.RestartScene();
     }
+
+    
 
     private void OnJump(DipInput dinput)
     {

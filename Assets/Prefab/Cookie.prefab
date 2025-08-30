@@ -170,3 +170,4 @@ MonoBehaviour:
   _staminaMax: 200
   _returnSpeed: 5
   _returnThreshold: 0.25
+  _cookieChunkParticle: {fileID: 2320359158044277070, guid: dfd93ce1431ffda4091df2d74b3e9f38, type: 3}
