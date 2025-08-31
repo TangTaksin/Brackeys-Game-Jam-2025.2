@@ -5992,7 +5992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f5d3ec66855f3479cc3419df692353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameoverDelay: 2.5
+  _gameoverDelay: 0.5
 --- !u!4 &1209518668
 Transform:
   m_ObjectHideFlags: 0
