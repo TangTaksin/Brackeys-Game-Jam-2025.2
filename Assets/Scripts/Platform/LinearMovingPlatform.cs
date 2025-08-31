@@ -9,6 +9,8 @@ public class LinearMovingPlatform : Platform
     private Vector3 endPos;
     private bool movingToEnd = true;
 
+    GameObject _childPlayer;
+
     protected override void Awake()
     {
         base.Awake();
@@ -36,12 +38,24 @@ public class LinearMovingPlatform : Platform
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-            collision.transform.SetParent(transform);
+        {
+            _childPlayer = collision.gameObject;
+            _childPlayer.transform.SetParent(transform);
+        }
+            
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-            collision.transform.SetParent(null);
+        var active = collision.gameObject.activeInHierarchy;
+
+        if (collision.gameObject == _childPlayer)
+        {
+            if (active)
+            {
+                _childPlayer.transform.SetParent(null);
+                _childPlayer = null;
+            }
+        }
     }
 }
