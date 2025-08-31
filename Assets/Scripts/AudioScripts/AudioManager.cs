@@ -126,13 +126,13 @@ public class AudioManager : MonoBehaviour
         if (loopedSFX.ContainsKey(clip))
             return loopedSFX[clip];
 
-        AudioSource source = gameObject.AddComponent<AudioSource>();
-        source.clip = clip;
-        source.loop = true;
-        source.Play();
+        // Use the existing sfxSource
+        sfxSource.clip = clip;
+        sfxSource.loop = true;
+        sfxSource.Play();
 
-        loopedSFX[clip] = source;
-        return source;
+        loopedSFX[clip] = sfxSource;
+        return sfxSource;
     }
 
     public void StopLoopSFX(AudioClip clip)
