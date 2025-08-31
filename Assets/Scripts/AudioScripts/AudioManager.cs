@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -13,7 +14,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip ambientClip;
 
     [Header("Sound Effects")]
-    public AudioClip generalSFX;
+    public AudioClip grab_CookieSFX;
+    public AudioClip release_Cookie_Sfx;
+    public AudioClip dip_milk_Sfx;
+    public AudioClip low_Stamina_sfx;
+    public AudioClip eat_Cookie_sfx;
+    public AudioClip lose_Cookie_sfx;
+    public AudioClip cookie_Jump_sfx;
+    public AudioClip goal_sfx;
+    public AudioClip bouncing_Sfx;
     public AudioClip[] walkingClips;
 
     [Header("Step Timing Settings")]
@@ -30,7 +39,11 @@ public class AudioManager : MonoBehaviour
 
     private float lastStepTime;
 
+    // Singleton
     public static AudioManager Instance { get; private set; }
+
+    // Track looped SFX sources
+    private Dictionary<AudioClip, AudioSource> loopedSFX = new Dictionary<AudioClip, AudioSource>();
 
     private void Awake()
     {
@@ -51,6 +64,7 @@ public class AudioManager : MonoBehaviour
         if (ambientClip != null) PlayAmbient(ambientClip);
     }
 
+    // ----------------- MUSIC / AMBIENT -----------------
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null) return;
@@ -71,6 +85,17 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeInAudio(ambientSource));
     }
 
+    public void StopMusicFadeOut()
+    {
+        StartCoroutine(FadeOutAudio(musicSource));
+    }
+
+    public void StopAmbientFadeOut()
+    {
+        StartCoroutine(FadeOutAudio(ambientSource));
+    }
+
+    // ----------------- SFX -----------------
     public void PlaySFX(AudioClip clip)
     {
         if (clip == null) return;
@@ -92,16 +117,41 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void StopMusicFadeOut()
+    // ----------------- LOOPING SFX -----------------
+    public AudioSource PlayLoopSFX(AudioClip clip)
     {
-        StartCoroutine(FadeOutAudio(musicSource));
+        if (clip == null) return null;
+
+        // If already looping, just return it
+        if (loopedSFX.ContainsKey(clip))
+            return loopedSFX[clip];
+
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.loop = true;
+        source.Play();
+
+        loopedSFX[clip] = source;
+        return source;
     }
 
-    public void StopAmbientFadeOut()
+    public void StopLoopSFX(AudioClip clip)
     {
-        StartCoroutine(FadeOutAudio(ambientSource));
+        if (clip == null) return;
+
+        if (loopedSFX.TryGetValue(clip, out AudioSource source))
+        {
+            if (source != null)
+            {
+                source.Stop();
+                source.loop = false;
+                source.clip = null; // release reference
+            }
+            loopedSFX.Remove(clip);
+        }
     }
 
+    // ----------------- FADE HELPERS -----------------
     private IEnumerator FadeOutAudio(AudioSource source)
     {
         float startVolume = source.volume;

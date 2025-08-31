@@ -24,6 +24,7 @@ public class BouncingPlatform : Platform
 
             // Animate platform squash and stretch
             AnimateBounce();
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.bouncing_Sfx);
         }
     }
 

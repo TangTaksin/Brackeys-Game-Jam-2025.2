@@ -108,16 +108,16 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(onDeadParticle);
 
         GameManager.Instance.GameOver(GameManager.gameoverType.smiley_down);
-
         Destroy(this.gameObject);
     }
 
-    
+
 
     private void OnJump(DipInput dinput)
     {
-        if (isGrounded == true)
+        if (isGrounded == true && GameManager.Instance.IsPlaying)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.cookie_Jump_sfx);
             // Calculate speed boost based on input direction
             float horizontalBoost = moveInputValue * jumpSpeedBoost;
             float newXVelocity = rb.linearVelocity.x + horizontalBoost;

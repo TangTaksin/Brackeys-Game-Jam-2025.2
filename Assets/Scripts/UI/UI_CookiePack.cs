@@ -23,7 +23,7 @@ public class UI_CookiePack : MonoBehaviour
     void SubscribeEvents()
     {
         CookiePack.RemainedCookieUpdated += UpdateDisplay;
-        }
+    }
 
     void UnsubscribeEvents()
     {
@@ -41,6 +41,13 @@ public class UI_CookiePack : MonoBehaviour
         {
             _cookieChunkParticle.transform.position = transform.position;
             Instantiate(_cookieChunkParticle);
+            if (GameManager.Instance.IsPlaying)
+            {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.lose_Cookie_sfx);
+
+            }
+
+
         }
     }
 }

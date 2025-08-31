@@ -7,7 +7,7 @@ public class Cup : DipArea
 
     [Header("Stamina Reduction")]
     [SerializeField] AnimationCurve _staminaReductionCurve;
-   
+
     [Header("Contained Dip Areas")]
     [SerializeField] DipArea[] containedDipAreas;
 
@@ -48,6 +48,12 @@ public class Cup : DipArea
     {
         if (_milkSplashParticle)
             _milkSplashParticle.Play();
+            
+        if (GameManager.Instance.IsPlaying)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.dip_milk_Sfx);
+        }
+
     }
 
     void TrackCookieDepth()

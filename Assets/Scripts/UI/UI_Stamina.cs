@@ -97,10 +97,17 @@ public class UI_Stamina : MonoBehaviour
                 pulseTween = transform.DOScale(1.1f, 0.4f)
                     .SetLoops(-1, LoopType.Yoyo)
                     .SetEase(Ease.InOutSine);
+                if (GameManager.Instance.IsPlaying)
+                {
+                    AudioManager.Instance.PlayLoopSFX(AudioManager.Instance.low_Stamina_sfx);
+
+                }
+
             }
         }
         else
         {
+            AudioManager.Instance.StopLoopSFX(AudioManager.Instance.low_Stamina_sfx);
             staminaFillImage.DOColor(Color.white, 0.2f);
 
             if (pulseTween != null)
