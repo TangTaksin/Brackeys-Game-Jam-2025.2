@@ -74,7 +74,7 @@ public class SettingsManager : MonoBehaviour
     {
         if (audioMixer == null || slider == null) return;
 
-        float value = PlayerPrefs.GetFloat(key, 1f);
+        float value = PlayerPrefs.GetFloat(key, .5f);
         slider.value = value;
         audioMixer.SetFloat(exposedParam, Mathf.Log10(value) * 20f);
     }
