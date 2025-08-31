@@ -48,7 +48,12 @@ public class Cup : DipArea
     {
         if (_milkSplashParticle)
             _milkSplashParticle.Play();
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.dip_milk_Sfx);
+            
+        if (GameManager.Instance.IsPlaying)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.dip_milk_Sfx);
+        }
+
     }
 
     void TrackCookieDepth()

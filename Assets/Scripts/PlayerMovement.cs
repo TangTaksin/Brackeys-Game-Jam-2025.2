@@ -108,8 +108,6 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(onDeadParticle);
 
         GameManager.Instance.GameOver(GameManager.gameoverType.smiley_down);
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.lose_Cookie_sfx);
-
         Destroy(this.gameObject);
     }
 
@@ -117,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(DipInput dinput)
     {
-        if (isGrounded == true)
+        if (isGrounded == true && GameManager.Instance.IsPlaying)
         {
             AudioManager.Instance.PlaySFX(AudioManager.Instance.cookie_Jump_sfx);
             // Calculate speed boost based on input direction

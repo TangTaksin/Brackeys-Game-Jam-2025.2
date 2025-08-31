@@ -7,13 +7,18 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    enum gameState
+    private enum GameState
     {
         playing,
         win,
         lose
     }
-    gameState _currentGameState;
+    private GameState _currentGameState;
+
+    // expose only read-only properties
+    public bool IsPlaying => _currentGameState == GameState.playing;
+    public bool IsWin => _currentGameState == GameState.win;
+    public bool IsLose => _currentGameState == GameState.lose;
 
     public enum gameoverType
     {
@@ -37,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
-        _currentGameState = gameState.playing;
+        _currentGameState = GameState.playing;
         DOTween.KillAll();
     }
 
@@ -52,11 +57,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(gameoverType state)
     {
-        if (_currentGameState == gameState.win 
-            || _currentGameState == gameState.lose)
+        if (_currentGameState == GameState.win
+            || _currentGameState == GameState.lose)
             return;
 
-        _currentGameState = gameState.lose;
+        _currentGameState = GameState.lose;
 
         switch (state)
         {
@@ -72,6 +77,8 @@ public class GameManager : MonoBehaviour
 
                 break;
         }
+        
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.lose_Cookie_sfx);
 
         Invoke("RestartScene", _gameoverDelay);
     }
@@ -90,14 +97,17 @@ public class GameManager : MonoBehaviour
 
         Init();
     }
-    
-    
+
+
     public void Win()
     {
-        if (_currentGameState == gameState.lose)
+        if (_currentGameState == GameState.lose)
+            return;
+
 
         Debug.Log("🎉 You Win!");
-        _currentGameState = gameState.win;
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.goal_sfx);
+        _currentGameState = GameState.win;
         Transition.CalledFadeIn?.Invoke();
         Transition.FadeInOver += LoadNextScene;
     }

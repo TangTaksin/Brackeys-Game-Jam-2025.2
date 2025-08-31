@@ -41,7 +41,12 @@ public class UI_CookiePack : MonoBehaviour
         {
             _cookieChunkParticle.transform.position = transform.position;
             Instantiate(_cookieChunkParticle);
-            AudioManager.Instance.PlaySFX(AudioManager.Instance.lose_Cookie_sfx);
+            if (GameManager.Instance.IsPlaying)
+            {
+                AudioManager.Instance.PlaySFX(AudioManager.Instance.lose_Cookie_sfx);
+
+            }
+
 
         }
     }

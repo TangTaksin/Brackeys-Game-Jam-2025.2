@@ -74,7 +74,12 @@ public class Cookie : MonoBehaviour
 
     void OnMouseDown()
     {
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.grab_CookieSFX);
+        if (GameManager.Instance.IsPlaying)
+        {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.grab_CookieSFX);
+
+        }
+
         var cursor = Mouse.current.position.ReadValue();
         var wCursor = cam.ScreenToWorldPoint(cursor);
         _cursorOffset = transform.position - wCursor;
@@ -101,7 +106,11 @@ public class Cookie : MonoBehaviour
         ResetStamina();
 
         OnCookieEaten?.Invoke();
-        AudioManager.Instance.PlaySFX(AudioManager.Instance.eat_Cookie_sfx);
+        if (GameManager.Instance.IsPlaying)
+        {
+            // do something
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.eat_Cookie_sfx);
+        }
     }
 
 
@@ -125,6 +134,9 @@ public class Cookie : MonoBehaviour
 
     public void ReduceStamina(float amount)
     {
+        if (_isReturning)
+            return;
+
         stamina_current -= amount;
         Mathf.Clamp(stamina_current, 0, _staminaMax);
 
