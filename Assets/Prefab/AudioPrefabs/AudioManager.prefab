@@ -180,7 +180,7 @@ MonoBehaviour:
   musicSource: {fileID: 579321607855361387}
   ambientSource: {fileID: 4009720901657387322}
   sfxSource: {fileID: 7799966030440228392}
-  musicClip: {fileID: 8300000, guid: b23aeedcd48f53c4b8379fa9ab647d4f, type: 3}
+  musicClip: {fileID: 8300000, guid: 701d6170636aa914cbce76331059c483, type: 3}
   ambientClip: {fileID: 0}
   grab_CookieSFX: {fileID: 8300000, guid: 0ba155553b550ad4bad00018980437b9, type: 3}
   release_Cookie_Sfx: {fileID: 8300000, guid: 138e3c18e9f3671459b75728f989a857, type: 3}
@@ -189,6 +189,8 @@ MonoBehaviour:
   eat_Cookie_sfx: {fileID: 8300000, guid: f5341647a2ed6134fae0728ecd63d6b2, type: 3}
   lose_Cookie_sfx: {fileID: 8300000, guid: 8053a89ad93a27444a013385d9e1b6eb, type: 3}
   cookie_Jump_sfx: {fileID: 8300000, guid: bd34469d6efc0264f83cb2d71f0a020b, type: 3}
+  goal_sfx: {fileID: 8300000, guid: 504613fc8fc299d4285a1169621af78c, type: 3}
+  bouncing_Sfx: {fileID: 8300000, guid: 5c0cad151a3dad34791b1ced15b09725, type: 3}
   walkingClips: []
   minStepDelay: 0.3
   maxStepDelay: 0.6

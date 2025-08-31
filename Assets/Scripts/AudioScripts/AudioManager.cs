@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip lose_Cookie_sfx;
     public AudioClip cookie_Jump_sfx;
     public AudioClip goal_sfx;
+    public AudioClip bouncing_Sfx;
     public AudioClip[] walkingClips;
 
     [Header("Step Timing Settings")]
